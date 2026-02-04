@@ -1,47 +1,11 @@
-export default function DashboardEmpresa() {
+import Sidebar from "@/components/empresa/Sidebar"
+
+export default function EmpresaDashboard() {
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-gray-50">
+      <Sidebar />
 
-      {/* SIDEBAR */}
-      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col fixed h-full">
-        <div className="p-8">
-          <div className="text-2xl font-bold tracking-tighter text-gray-800 uppercase">
-            OMNI<span className="text-amber-500">BIZ</span>
-          </div>
-        </div>
-
-        <nav className="flex-grow px-4 space-y-2">
-          <a className="flex items-center p-3 text-amber-600 font-semibold bg-amber-50 rounded-xl">
-            📊 Dashboard
-          </a>
-          <a className="flex items-center p-3 text-gray-600 rounded-xl hover:bg-slate-100">
-            📅 Agenda de Citas
-          </a>
-          <a className="flex items-center p-3 text-gray-600 rounded-xl hover:bg-slate-100">
-            ✨ Mis Servicios
-          </a>
-          <a className="flex items-center p-3 text-gray-600 rounded-xl hover:bg-slate-100">
-            👤 Clientes
-          </a>
-          <a className="flex items-center p-3 text-gray-600 rounded-xl hover:bg-slate-100">
-            ⚙️ Configuración
-          </a>
-        </nav>
-
-        <div className="p-6 border-t border-gray-100">
-          <div className="bg-gray-900 text-white p-4 rounded-2xl text-xs">
-            <p className="font-bold">Plan Premium</p>
-            <p className="opacity-60 mb-3">Vence en 20 días</p>
-            <button className="text-amber-400 font-bold underline">
-              Renovar
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      {/* CONTENIDO */}
       <main className="ml-64 flex-grow p-10">
-
         {/* HEADER */}
         <header className="flex justify-between items-center mb-10">
           <div>
@@ -65,41 +29,44 @@ export default function DashboardEmpresa() {
           </div>
         </header>
 
-        {/* ESTADÍSTICAS */}
+        {/* STATS */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           {[
-            ["Reservas Hoy", "14", "↑ 12% vs ayer"],
-            ["Ingresos Estimados", "$1,240", "Basado en reservas"],
-            ["Nuevos Clientes", "5", "Requieren atención"],
-          ].map(([title, value, info]) => (
+            { title: "Reservas Hoy", value: "14", note: "↑ 12% vs ayer" },
+            { title: "Ingresos", value: "$1,240", note: "Estimado" },
+            { title: "Nuevos Clientes", value: "5", note: "Pendientes" },
+            { title: "Puntuación", value: "4.9 / 5", note: "120 reseñas" },
+          ].map((stat) => (
             <div
-              key={title}
-              className="bg-white p-6 rounded-3xl shadow-sm border"
+              key={stat.title}
+              className="bg-white p-6 rounded-3xl shadow border"
             >
-              <p className="text-gray-400 text-sm uppercase">{title}</p>
-              <h3 className="text-3xl font-bold mt-2">{value}</h3>
-              <p className="text-xs mt-2 text-gray-500">{info}</p>
+              <p className="text-gray-400 text-sm uppercase">
+                {stat.title}
+              </p>
+              <h3 className="text-3xl font-bold mt-2">
+                {stat.value}
+              </h3>
+              <p className="text-xs mt-2 text-gray-500">
+                {stat.note}
+              </p>
             </div>
           ))}
-
-          <div className="bg-amber-500 p-6 rounded-3xl text-white">
-            <p className="text-sm uppercase">Puntuación</p>
-            <h3 className="text-3xl font-bold mt-2">4.9 / 5</h3>
-            <p className="text-xs">Basado en 120 reseñas</p>
-          </div>
         </div>
 
-        {/* TABLA */}
-        <div className="bg-white rounded-3xl p-8 shadow-sm border">
-          <h2 className="text-2xl font-bold mb-6">Próximas Reservas</h2>
+        {/* RESERVAS */}
+        <div className="bg-white rounded-3xl p-8 shadow border">
+          <h2 className="text-2xl font-bold mb-6">
+            Próximas Reservas
+          </h2>
 
-          <table className="w-full text-sm">
+          <table className="w-full text-left">
             <thead>
-              <tr className="text-gray-400 border-b">
-                <th className="py-3 text-left">Cliente</th>
-                <th>Servicio</th>
-                <th>Hora</th>
-                <th>Estado</th>
+              <tr className="text-xs text-gray-400 uppercase border-b">
+                <th className="pb-4">Cliente</th>
+                <th className="pb-4">Servicio</th>
+                <th className="pb-4">Hora</th>
+                <th className="pb-4">Estado</th>
               </tr>
             </thead>
             <tbody>
@@ -108,17 +75,17 @@ export default function DashboardEmpresa() {
                 <td>Masaje</td>
                 <td>14:00</td>
                 <td>
-                  <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs">
+                  <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-bold">
                     Confirmado
                   </span>
                 </td>
               </tr>
               <tr>
                 <td className="py-4 font-semibold">Carlos Ruiz</td>
-                <td>Hidroterapia</td>
-                <td>15:30</td>
+                <td>Facial</td>
+                <td>16:30</td>
                 <td>
-                  <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-xs">
+                  <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-xs font-bold">
                     Pendiente
                   </span>
                 </td>
@@ -126,7 +93,6 @@ export default function DashboardEmpresa() {
             </tbody>
           </table>
         </div>
-
       </main>
     </div>
   )
